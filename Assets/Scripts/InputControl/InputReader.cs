@@ -6,29 +6,29 @@ using UnityEngine.InputSystem;
 
 public class InputReader : MonoBehaviour, InputControls.ICharacterActions
 {
-    private InputControls inputControls;
-    public Vector2 moveComposite { get; private set; }
-    public Action crouchPerformed { get; private set; }
-    public Action pronePerformed { get; private set; }
+    private InputControls _inputControls;
+    public Vector2 moveDirection;
+    public Action crouchPerformed;
+    public Action pronePerformed;
 
     private void OnEnable()
     {
-        if (inputControls != null)
+        if (_inputControls != null)
             return;
 
-        inputControls = new InputControls();
-        inputControls.Character.SetCallbacks(this);
-        inputControls.Character.Enable();
+        _inputControls = new InputControls();
+        _inputControls.Character.SetCallbacks(this);
+        _inputControls.Character.Enable();
     }
 
     public void OnDisable()
     {
-        inputControls.Character.Disable();
+        _inputControls.Character.Disable();
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        moveComposite = context.ReadValue<Vector2>();
+        moveDirection = context.ReadValue<Vector2>();
     }
 
     public void OnCrouch(InputAction.CallbackContext context)

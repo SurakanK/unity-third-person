@@ -8,7 +8,8 @@ using UnityEngine;
 public class CharacterStateMachine : StateMachine
 {
     public Vector3 velocity;
-    public float movementSpeed { get; private set; } = 5f;
+    public Vector3 direction;
+    public float movementSpeed = 5f;
     public float LookRotationDampFactor { get; private set; } = 10f;
     public Transform mainCamera { get; private set; }
     public InputReader inputReader { get; private set; }
@@ -23,6 +24,6 @@ public class CharacterStateMachine : StateMachine
         animator = GetComponent<Animator>();
         controller = FindObjectOfType<CharacterController>();
 
-        Initialize(new CharacterMoveState(this));
+        Initialize(new CharacterStandState(this));
     }
 }

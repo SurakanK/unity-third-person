@@ -37,11 +37,22 @@ public abstract class CharacterBaseState : IState
     {
         Vector3 cameraForward = new(stateMachine.mainCamera.forward.x, 0, stateMachine.mainCamera.forward.z);
         Vector3 cameraRight = new(stateMachine.mainCamera.right.x, 0, stateMachine.mainCamera.right.z);
-        
-        Vector3 moveDirection = cameraForward.normalized * stateMachine.inputReader.moveComposite.y + cameraRight.normalized * stateMachine.inputReader.moveComposite.x;
 
-        stateMachine.velocity.x = moveDirection.x * stateMachine.movementSpeed;
-        stateMachine.velocity.z = moveDirection.z * stateMachine.movementSpeed;
+        stateMachine.direction = cameraForward.normalized * stateMachine.inputReader.moveDirection.y + cameraRight.normalized * stateMachine.inputReader.moveDirection.x;
+
+        stateMachine.velocity.x = stateMachine.direction.x * stateMachine.movementSpeed;
+        stateMachine.velocity.z = stateMachine.direction.z * stateMachine.movementSpeed;
+    }
+
+    protected void FaceMoveDirection()
+    {
+        Vector3 faceDirection = new(stateMachine.velocity.x, 0f, stateMachine.velocity.z);
+
+        if (faceDirection == Vector3.zero)
+            return;
+
+        Vector3 cameraForward = new(stateMachine.mainCamera.forward.x, 0, stateMachine.mainCamera.forward.z);
+        stateMachine.transform.rotation = Quaternion.Slerp(stateMachine.transform.rotation, Quaternion.LookRotation(cameraForward), stateMachine.LookRotationDampFactor * Time.deltaTime);
     }
 
     protected void Move()

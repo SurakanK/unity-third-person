@@ -121,22 +121,70 @@
                     "action": "Prone",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3c4dff38-5e03-4dec-9475-6d550b4640ef",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Prone",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Camera",
+            "id": "f478f493-7369-46bb-95f6-ed0caef4e767",
+            "actions": [
+                {
+                    "name": "TouchMove",
+                    "type": "Value",
+                    "id": "2d6bc53d-dae0-4d7e-8852-f7afa35b7101",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "TouchStart",
+                    "type": "Value",
+                    "id": "53f29ef1-cbaa-4d87-a634-6227d67eee8a",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "618fa77e-7958-4210-bae6-0b4d007245ad",
+                    "path": "<Touchscreen>/primaryTouch/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchMove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c6b59935-870c-47af-aaee-4311d451ae79",
+                    "path": "<Touchscreen>/primaryTouch/startPosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
     ],
     "controlSchemes": [
-        {
-            "name": "KeyBoard and Mouse",
-            "bindingGroup": "KeyBoard and Mouse",
-            "devices": [
-                {
-                    "devicePath": "<Keyboard>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
         {
             "name": "Desktop",
             "bindingGroup": "Desktop",
