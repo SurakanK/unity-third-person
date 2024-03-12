@@ -27,7 +27,7 @@ namespace StatePatternInUnity
 
         }
 
-        public virtual IEnumerator DoLogic()
+        public virtual IEnumerator Coroutine()
         {
             yield return null;
         }

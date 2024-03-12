@@ -17,16 +17,16 @@ public class GameConfig
         {DirectionType.FrontRight, new Vector2(1,1)},
     };
 
-    public static readonly Dictionary<(DirectionType, MoveType), float> MoveSpeed = new Dictionary<(DirectionType, MoveType), float>
+    public static readonly Dictionary<(DirectionType, CharacterState), float> MoveSpeed = new Dictionary<(DirectionType, CharacterState), float>
     {
-        {(DirectionType.None, MoveType.Stand), 0f},
-        {(DirectionType.Front, MoveType.Stand), 4f},
-        {(DirectionType.FrontLeft, MoveType.Stand), 3f},
-        {(DirectionType.Left, MoveType.Stand), 3f},
-        {(DirectionType.BackLeft, MoveType.Stand), 3f},
-        {(DirectionType.Back, MoveType.Stand), 3f},
-        {(DirectionType.BackRight, MoveType.Stand), 3f},
-        {(DirectionType.Right, MoveType.Stand), 3f},
-        {(DirectionType.FrontRight, MoveType.Stand), 3f},
+        {(DirectionType.None, CharacterState.Stand), 0f},
+        {(DirectionType.Front, CharacterState.Stand), 4f},
+        {(DirectionType.FrontLeft, CharacterState.Stand), 3f},
+        {(DirectionType.Left, CharacterState.Stand), 3f},
+        {(DirectionType.BackLeft, CharacterState.Stand), 3f},
+        {(DirectionType.Back, CharacterState.Stand), 3f},
+        {(DirectionType.BackRight, CharacterState.Stand), 3f},
+        {(DirectionType.Right, CharacterState.Stand), 3f},
+        {(DirectionType.FrontRight, CharacterState.Stand), 3f},
     };
 }

@@ -8,9 +8,12 @@ public class CharacterStandState : CharacterBaseState
 
     public override void OnActive()
     {
+        base.OnActive();
+        stateMachine.curState = CharacterState.Stand;
         stateMachine.velocity.y = Physics.gravity.y;
         stateMachine.inputReader.crouchPerformed += ChangeStateCrouch;
         stateMachine.inputReader.pronePerformed += ChangeStateProne;
+        stateMachine.animator.SetBool("Walk", true);
     }
 
     public override void Update()
@@ -31,22 +34,24 @@ public class CharacterStandState : CharacterBaseState
         animator.SetFloat("x", direction.X, 0.1f, Time.deltaTime);
         animator.SetFloat("y", direction.Y, 0.1f, Time.deltaTime);
         animator.SetFloat("velocity", moveDirection.magnitude);
-        animator.SetBool("Walk", moveDirection.magnitude > 0);
     }
 
     public override void OnEnded()
     {
+        base.OnEnded();
         stateMachine.inputReader.crouchPerformed -= ChangeStateCrouch;
         stateMachine.inputReader.pronePerformed -= ChangeStateProne;
+
+        stateMachine.animator.SetBool("Walk", false);
     }
 
     private void ChangeStateCrouch()
     {
-
+        stateMachine.ChangeState(new CharacterCrouchState(stateMachine));
     }
 
     private void ChangeStateProne()
     {
-
+        stateMachine.ChangeState(new CharacterProneState(stateMachine));
     }
 }

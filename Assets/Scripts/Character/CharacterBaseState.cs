@@ -42,8 +42,7 @@ public abstract class CharacterBaseState : IState
         var direction = GameConfig.AnimatorChrecter[directionType];
         var dirX = direction.X * stateMachine.inputReader.moveDirection.magnitude;
         var dirY = direction.Y * stateMachine.inputReader.moveDirection.magnitude;
-        var speed = stateMachine.GetMovementSpeed(MoveType.Stand, directionType);
-
+        var speed = stateMachine.GetMovementSpeed(stateMachine.curState, directionType);
         stateMachine.direction = cameraForward.normalized * dirY + cameraRight.normalized * dirX;
         stateMachine.velocity.x = stateMachine.direction.x * speed;
         stateMachine.velocity.z = stateMachine.direction.z * speed;

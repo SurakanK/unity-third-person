@@ -4,7 +4,7 @@ using System.Collections.Generic;
 [Serializable]
 public class MoveSpeed
 {
-    public MoveType moveType;
+    public CharacterState moveType;
     public List<DirectionSpeed> directionSpeed;
 }
 

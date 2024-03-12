@@ -113,6 +113,17 @@
                 },
                 {
                     "name": "",
+                    "id": "749176fe-6918-406f-816f-dbe036419d0c",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "4bf45e02-cb9d-4230-a6cc-910ded981760",
                     "path": "<Keyboard>/z",
                     "interactions": "",

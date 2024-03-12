@@ -12,7 +12,7 @@ public enum DirectionType
     BackRight,
 }
 
-public enum MoveType {
+public enum CharacterState {
     Stand,
     Crouch,
     Prone

@@ -5,7 +5,7 @@ public static class GameUtile
 {
     static public DirectionType DirectionControl(Vector2 direction)
     {
-        if (direction.magnitude == 0)
+        if (direction.magnitude < 0.4)
         {
             return DirectionType.None;
         }
