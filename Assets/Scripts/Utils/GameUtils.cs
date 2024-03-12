@@ -3,62 +3,47 @@ using UnityEngine;
 
 public static class GameUtile
 {
-    //0
-    //-90,90
-    // -180,180
-    static public Vector2Int AnimatorDirection(Vector2 direction)
+    static public DirectionType DirectionControl(Vector2 direction)
     {
         if (direction.magnitude == 0)
         {
-            return Vector2Int.zero;
+            return DirectionType.None;
         }
 
         var angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
         angle = (angle + 360) % 360;
-        int x = 0;
-        int y = 0;
 
         if (angle > 22.5 && angle <= 67.5) //FR
         {
-            y = 1;
-            x = 1;
+            return DirectionType.FrontRight;
         }
         else if (angle > 67.5 && angle <= 112.5) //R
         {
-            y = 0;
-            x = 1;
+            return DirectionType.Right;
         }
         else if (angle > 112.5 && angle <= 157.5) //RB
         {
-            y = -1;
-            x = 1;
-
+            return DirectionType.BackRight;
         }
         else if (angle > 157.5 && angle <= 202.5) //B
         {
-            y = -1;
-            x = 0;
+            return DirectionType.Back;
         }
         else if (angle > 202.5 && angle <= 247.5) //BL
         {
-            y = -1;
-            x = -1;
+            return DirectionType.BackLeft;
         }
         else if (angle > 247.5 && angle <= 292.5) //L
         {
-            y = 0;
-            x = -1;
+            return DirectionType.Left;
         }
         else if (angle > 292.5 && angle <= 337.5) //FL
         {
-            y = 1;
-            x = -1;
+            return DirectionType.FrontLeft;
         }
         else //F
         {
-            y = 1;
-            x = 0;
+            return DirectionType.Front;
         }
-        return new Vector2Int(x, y);
     }
 }

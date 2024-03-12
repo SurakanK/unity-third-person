@@ -25,10 +25,11 @@ public class CharacterStandState : CharacterBaseState
     {
         var animator = stateMachine.animator;
         var moveDirection = stateMachine.inputReader.moveDirection;
-        var direction = GameUtile.AnimatorDirection(moveDirection);
-        
-        animator.SetFloat("x", direction.x, 0.1f, Time.deltaTime);
-        animator.SetFloat("y", direction.y, 0.1f, Time.deltaTime);
+        var directionType = GameUtile.DirectionControl(moveDirection);
+        var direction = GameConfig.AnimatorChrecter[directionType];
+
+        animator.SetFloat("x", direction.X, 0.1f, Time.deltaTime);
+        animator.SetFloat("y", direction.Y, 0.1f, Time.deltaTime);
         animator.SetFloat("velocity", moveDirection.magnitude);
         animator.SetBool("Walk", moveDirection.magnitude > 0);
     }

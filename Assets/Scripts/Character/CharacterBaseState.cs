@@ -33,15 +33,20 @@ public abstract class CharacterBaseState : IState
         Logging.Log(string.Format("<color=#{0:X2}{1:X2}{2:X2}> Ended state: </color> {3}", (byte)(color.r * 255f), (byte)(color.g * 255f), (byte)(color.b * 255f), this.GetType().FullName));
     }
 
-    protected void CalculateMoveDirection()
+    protected void CalculateMoveDirection() 
     {
         Vector3 cameraForward = new(stateMachine.mainCamera.forward.x, 0, stateMachine.mainCamera.forward.z);
         Vector3 cameraRight = new(stateMachine.mainCamera.right.x, 0, stateMachine.mainCamera.right.z);
 
-        stateMachine.direction = cameraForward.normalized * stateMachine.inputReader.moveDirection.y + cameraRight.normalized * stateMachine.inputReader.moveDirection.x;
+        var directionType = GameUtile.DirectionControl(stateMachine.inputReader.moveDirection);
+        var direction = GameConfig.AnimatorChrecter[directionType];
+        var dirX = direction.X * stateMachine.inputReader.moveDirection.magnitude;
+        var dirY = direction.Y * stateMachine.inputReader.moveDirection.magnitude;
+        var speed = stateMachine.GetMovementSpeed(MoveType.Stand, directionType);
 
-        stateMachine.velocity.x = stateMachine.direction.x * stateMachine.movementSpeed;
-        stateMachine.velocity.z = stateMachine.direction.z * stateMachine.movementSpeed;
+        stateMachine.direction = cameraForward.normalized * dirY + cameraRight.normalized * dirX;
+        stateMachine.velocity.x = stateMachine.direction.x * speed;
+        stateMachine.velocity.z = stateMachine.direction.z * speed;
     }
 
     protected void FaceMoveDirection()
