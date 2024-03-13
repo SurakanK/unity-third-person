@@ -60,7 +60,8 @@ public class CharacterCrouchState : CharacterBaseState
 
     private void ChangeStateProne()
     {
-        Debug.Log("ChangeStateProne");
+        if (!animFinished) return;
+        stateMachine.StartCoroutine(ChangeToStateProne());
     }
 
     private IEnumerator StartCrouch()
@@ -79,4 +80,12 @@ public class CharacterCrouchState : CharacterBaseState
         stateMachine.ChangeState(new CharacterStandState(stateMachine));
     }
 
+    private IEnumerator ChangeToStateProne()
+    {
+        animFinished = false;
+        stateMachine.animator.SetBool("Crouch", false);
+        stateMachine.animator.SetBool("Prone", true);
+        yield return new WaitForSeconds(0.3f);
+        stateMachine.ChangeState(new CharacterProneState(stateMachine));
+    }
 }
