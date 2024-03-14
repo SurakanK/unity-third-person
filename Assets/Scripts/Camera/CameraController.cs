@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour, InputControls.ICameraActions
     [SerializeField] private Vector2 _speedRotation;
 
     private CinemachineFreeLook _freeLookCamera;
+
     private InputControls _inputControls;
     private bool _isTouchOnArea;
 
@@ -19,6 +20,8 @@ public class CameraController : MonoBehaviour, InputControls.ICameraActions
     private void OnEnable()
     {
         _freeLookCamera = GetComponent<CinemachineFreeLook>();
+        _freeLookCamera.m_XAxis.m_InputAxisName = "";
+        _freeLookCamera.m_YAxis.m_InputAxisName = "";
 
         if (_inputControls != null)
             return;
@@ -31,6 +34,17 @@ public class CameraController : MonoBehaviour, InputControls.ICameraActions
     public void OnDisable()
     {
         _inputControls.Camera.Disable();
+    }
+
+    public void Update()
+    {
+        foreach (var touch in Input.touches)
+        {
+            if (IsPointerOnArea(touch.position) && touch.phase == UnityEngine.TouchPhase.Ended)
+            {
+                _isTouchOnArea = false;
+            }
+        }
     }
 
     public void OnTouchStart(InputAction.CallbackContext context)
@@ -49,7 +63,7 @@ public class CameraController : MonoBehaviour, InputControls.ICameraActions
 
         var delta = context.ReadValue<Vector2>();
         _freeLookCamera.m_XAxis.Value += delta.x * _speedRotation.x;
-        _freeLookCamera.m_YAxis.Value += delta.y * _speedRotation.y *-1;
+        _freeLookCamera.m_YAxis.Value += delta.y * _speedRotation.y * -1;
     }
 
     private bool IsPointerOnArea(Vector2 screenPosition)

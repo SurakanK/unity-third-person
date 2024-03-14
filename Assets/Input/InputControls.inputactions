@@ -183,8 +183,30 @@
                 },
                 {
                     "name": "",
+                    "id": "574679d5-313c-4936-9e67-f2bf7ccbccff",
+                    "path": "<Touchscreen>/touch1/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchMove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "c6b59935-870c-47af-aaee-4311d451ae79",
                     "path": "<Touchscreen>/primaryTouch/startPosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8526721a-8061-4a1b-8367-80888e170ba5",
+                    "path": "<Touchscreen>/touch1/startPosition",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
