@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using FishNet.Object;
 using UnityEngine;
 
 namespace StatePatternInUnity
 {
-    public class StateMachine : MonoBehaviour
+    public class StateMachine : NetworkBehaviour
     {
         private IState _currentState;
 

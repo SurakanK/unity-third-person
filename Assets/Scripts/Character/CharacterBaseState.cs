@@ -33,7 +33,7 @@ public abstract class CharacterBaseState : IState
         Logging.Log(string.Format("<color=#{0:X2}{1:X2}{2:X2}> Ended state: </color> {3}", (byte)(color.r * 255f), (byte)(color.g * 255f), (byte)(color.b * 255f), this.GetType().FullName));
     }
 
-    protected void CalculateMoveDirection() 
+    protected void CalculateMoveDirection()
     {
         Vector3 cameraForward = new(stateMachine.mainCamera.forward.x, 0, stateMachine.mainCamera.forward.z);
         Vector3 cameraRight = new(stateMachine.mainCamera.right.x, 0, stateMachine.mainCamera.right.z);
@@ -46,6 +46,11 @@ public abstract class CharacterBaseState : IState
         stateMachine.direction = cameraForward.normalized * dirY + cameraRight.normalized * dirX;
         stateMachine.velocity.x = stateMachine.direction.x * speed;
         stateMachine.velocity.z = stateMachine.direction.z * speed;
+
+        // reset model 3d local transform
+        var model3d = stateMachine.transform.GetChild(0);
+        model3d.transform.localPosition = Vector3.zero;
+        model3d.transform.localEulerAngles = Vector3.zero;
     }
 
     protected void FaceMoveDirection()

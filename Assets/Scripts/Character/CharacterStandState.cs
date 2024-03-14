@@ -11,47 +11,46 @@ public class CharacterStandState : CharacterBaseState
         base.OnActive();
         stateMachine.curState = CharacterState.Stand;
         stateMachine.velocity.y = Physics.gravity.y;
-        stateMachine.inputReader.crouchPerformed += ChangeStateCrouch;
-        stateMachine.inputReader.pronePerformed += ChangeStateProne;
         stateMachine.animator.SetBool("Walk", true);
+
+        if (stateMachine.IsOwner)
+        {
+            stateMachine.inputReader.crouchPerformed += ChangeStateCrouch;
+            stateMachine.inputReader.pronePerformed += ChangeStateProne;
+        }
     }
 
     public override void Update()
     {
-        CalculateMoveDirection();
-        FaceMoveDirection();
-        Move();
-        Animation();
-    }
-
-    private void Animation()
-    {
-        var animator = stateMachine.animator;
-        var moveDirection = stateMachine.inputReader.moveDirection;
-        var directionType = GameUtile.DirectionControl(moveDirection);
-        var direction = GameConfig.AnimatorChrecter[directionType];
-
-        animator.SetFloat("x", direction.X, 0.1f, Time.deltaTime);
-        animator.SetFloat("y", direction.Y, 0.1f, Time.deltaTime);
-        animator.SetFloat("velocity", moveDirection.magnitude);
+        if (stateMachine.IsOwner)
+        {
+            CalculateMoveDirection();
+            FaceMoveDirection();
+            Move();
+            stateMachine.SendAnimation(stateMachine.inputReader.moveDirection);
+        }
     }
 
     public override void OnEnded()
     {
         base.OnEnded();
-        stateMachine.inputReader.crouchPerformed -= ChangeStateCrouch;
-        stateMachine.inputReader.pronePerformed -= ChangeStateProne;
+
+        if (stateMachine.IsOwner)
+        {
+            stateMachine.inputReader.crouchPerformed -= ChangeStateCrouch;
+            stateMachine.inputReader.pronePerformed -= ChangeStateProne;
+        }
 
         stateMachine.animator.SetBool("Walk", false);
     }
 
     private void ChangeStateCrouch()
     {
-        stateMachine.ChangeState(new CharacterCrouchState(stateMachine));
+        stateMachine.SendChangeState(CharacterState.Crouch);
     }
 
     private void ChangeStateProne()
     {
-        stateMachine.ChangeState(new CharacterProneState(stateMachine));
+        stateMachine.SendChangeState(CharacterState.Prone);
     }
 }
