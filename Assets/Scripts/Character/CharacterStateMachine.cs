@@ -92,6 +92,7 @@ public class CharacterStateMachine : StateMachine
         var directionType = GameUtile.DirectionControl(moveDirection);
         var direction = GameConfig.AnimatorChrecter[directionType];
 
+        // set direction animator
         animator.SetFloat("x", direction.X, 0.1f, Time.deltaTime);
         animator.SetFloat("y", direction.Y, 0.1f, Time.deltaTime);
         animator.SetFloat("velocity", moveDirection.magnitude);
